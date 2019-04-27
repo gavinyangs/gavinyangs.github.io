@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>
-    博客重启日 |
+    如何从外网 ssh 局域网中的 Linux 服务器 |
     
     Gavin‘s home</title>
   
@@ -23,7 +23,7 @@
 <body>
 <main class="content">
   <section class="outer">
-  <article id="post-博客重启日" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  <article id="post-如何从外网-ssh-局域网中的-Linux-服务器" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
     
@@ -31,7 +31,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      博客重启日
+      如何从外网 ssh 局域网中的 Linux 服务器
     </h1>
   
 
@@ -40,8 +40,8 @@
 
     
       <div class="article-meta">
-        <a href="/2019/04/26/博客重启日/" class="article-date">
-  <time datetime="2019-04-26T03:16:09.000Z" itemprop="datePublished">2019-04-26</time>
+        <a href="/2019/04/27/如何从外网-ssh-局域网中的-Linux-服务器/" class="article-date">
+  <time datetime="2019-04-27T11:15:34.000Z" itemprop="datePublished">2019-04-27</time>
 </a>
         
       </div>
@@ -53,12 +53,31 @@
       
 
       
-        <p>&#160; &#160; &#160; &#160;今天是 19 年 4 月 26 日，自己的博客停了一年多了，不应该啊。就连几个简单的 markdown 语法都快忘的差不多了，emacs 这么好用的工具啥时候才能搞定它？作为一名技术人，不该是这种状态，应有的状态是永远富有激情，不达目的誓不罢休的钻研劲。技术人还应有好记性不如烂笔头的精神，相关的知识点记录是非常有必要的。在此立下 flag， 知识是一点一滴积累起来的，我要坚持用博客来记录自己知识结构不断丰富的历程。<br>&#160; &#160; &#160; &#160;前端的工作最近没有在处理，发现自己跟同行脱节了，不前进就会被落下，这是再现实不过了的事情。把丢掉的重新捡起来，落下的需要补起来，关键是执行力。<br>&#160; &#160; &#160; &#160;最近工作也不太顺利，在初创公司是一人分担多人的角色，很多时候觉得自己有心无力。前端？后端？ERP？等都要兼顾，有时候事情样样来，使自己的工作效率低，自己也是非常失落的状态。做技术嘛，很多时候需要一颗强大的心脏支撑。早晨醒来看到女儿和老婆在身边是一件非常幸福的事情，我希望凭借自己的劳动能带给她们一个好一些的生活环境，很多事情能过就过了，男人嘛！需要一颗大心脏，才能支撑一个小家庭。<br>&#160; &#160; &#160; &#160;博客重启，希望自己好好把握，好好珍惜现在的工作和生活，加油！让自己活得精彩些。</p>
+        <p>&#160; &#160; &#160; &#160;时间过的太快了，又来到周六，不过还有好多活儿没有干完，最近用 QT 画图画了快几个月了，画的我有点抓狂，要掌握的新东西太多，各种杂事又多，没办法，言归正传：今天周六为了能早点回家陪老婆孩子逛商场，我想把自己调试地图的程序放在家里 debug，怎奈何，目前服务器已经移植到公司本地服务器，所以，为了实现能在家里 ssh 公司本地的服务器，我做了一点点简单的处理，轻松实现了我的目的。  </p>
+<p>###&#160; &#160; &#160; &#160;环境要求：  </p>
+<ul>
+<li><p>确保局域网中的 Linux 服务器 22(Linux 系统默认的 SSH 端口) 端口已经开启，查看 Linux 防火墙是否开启某个端口的指令是：<br>&#160; &#160; &#160; &#160;<code>`</code><br>firewall-cmd –query-port=22/tcp</p>
+<pre><code>&amp;#160;如果结果返回为 “no”，那么我们需要在防火墙规则里开启 22 端口：  
+&amp;#160; &amp;#160; &amp;#160; &amp;#160;
+</code></pre><p>firewall-cmd –add-port=22/tcp </p>
+<pre><code>&amp;#160;如果需要永久开启 22 端口，后面加上 --permanent 即可:  
+&amp;#160; &amp;#160; &amp;#160; &amp;#160;
+</code></pre><p>firewall-cmd –add-port=22/tcp –permanent<br><code>`</code>   </p>
+</li>
+<li><p>确保你的网络宽带具有静态 IP 的特点，且路由器具备外网端口转发的功能。 </p>
+</li>
+</ul>
+<p>###&#160; &#160; &#160; &#160;实现外网访问局域网中 Linux 服务器的步骤：  </p>
+<ul>
+<li>在局域网中的 Linux 服务器设置 SSH 服务器，并且开放 22 端口，在局域网中测试一遍此 Linux 服务器是否可以 SSH？一定要确保局域网中能够 SSH ，再设置外网 SSH；  </li>
+<li>在路由器的端口转发功能中：映射局域网内部 Linux 服务器的 IP 地址，以及 22 端口；  </li>
+<li>最后一点特别重要，需要在路由器的对外访问端口中也要填写 22 端口，应该能用其它端口实现的，目前还没有测试出来，测试 OK 之后再补进此篇文章中，目前路由器也设置为 22 端口是可以正常 SSH 到局域网中的 Linux 服务器。<br>&#160;综上，我就实现了在家中能够 SSH 到公司局域网中的 Linux 服务器，简单又方便。</li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://0upup.com/2019/04/26/博客重启日/" data-id="cjuzgn4v400015d1hl3dls0he" class="article-share-link">Share</a>
+      <a data-url="http://0upup.com/2019/04/27/如何从外网-ssh-局域网中的-Linux-服务器/" data-id="cjuzgn4v000005d1h9sybyhli" class="article-share-link">Share</a>
       
     </footer>
 
@@ -68,15 +87,11 @@
     
   <nav class="article-nav">
     
-      <a href="/2019/04/26/语法如何进行段落的首行缩进/" class="article-nav-link">
-        <strong class="article-nav-caption">Newer posts</strong>
-        <div class="article-nav-title">
-          
-            Markdown 语法如何实现段落的首行缩进以及换行功能
-          
-        </div>
-      </a>
     
+      <a href="/2019/04/26/语法如何进行段落的首行缩进/" class="article-nav-link">
+        <strong class="article-nav-caption">Olde posts</strong>
+        <div class="article-nav-title">Markdown 语法如何实现段落的首行缩进以及换行功能</div>
+      </a>
     
   </nav>
 

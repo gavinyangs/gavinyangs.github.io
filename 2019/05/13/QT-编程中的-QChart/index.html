@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>
-    如何从外网 ssh 局域网中的 Linux 服务器 |
+    QT 编程中的 QChart |
     
     Gavin‘s home</title>
   
@@ -23,7 +23,7 @@
 <body>
 <main class="content">
   <section class="outer">
-  <article id="post-如何从外网-ssh-局域网中的-Linux-服务器" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  <article id="post-QT-编程中的-QChart" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
     
@@ -31,7 +31,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      如何从外网 ssh 局域网中的 Linux 服务器
+      QT 编程中的 QChart
     </h1>
   
 
@@ -40,8 +40,8 @@
 
     
       <div class="article-meta">
-        <a href="/2019/04/27/如何从外网-ssh-局域网中的-Linux-服务器/" class="article-date">
-  <time datetime="2019-04-27T11:15:34.000Z" itemprop="datePublished">2019-04-27</time>
+        <a href="/2019/05/13/QT-编程中的-QChart/" class="article-date">
+  <time datetime="2019-05-12T16:23:07.000Z" itemprop="datePublished">2019-05-13</time>
 </a>
         
       </div>
@@ -53,28 +53,12 @@
       
 
       
-        <p>&#160; &#160; &#160; &#160;时间过的太快了，又来到周六，不过还有好多活儿没有干完，最近用 QT 画图画了快几个月了，画的我有点抓狂，要掌握的新东西太多，各种杂事又多，没办法，言归正传：今天周六为了能早点回家陪老婆孩子逛商场，我想把自己调试地图的程序放在家里 debug，怎奈何，目前服务器已经移植到公司本地服务器，所以，为了实现能在家里 ssh 公司本地的服务器，我做了一点点简单的处理，轻松实现了我的目的。  </p>
-<h3 id="环境要求："><a href="#环境要求：" class="headerlink" title="环境要求："></a>环境要求：</h3><ul>
-<li>确保局域网中的 Linux 服务器 22(Linux 系统默认的 SSH 端口) 端口已经开启，查看 Linux 防火墙是否开启某个端口的指令是：</li>
-</ul>
-<pre><code>firewall-cmd --query-port=22/tcp
-</code></pre><p>&#160;如果结果返回为 “no”，那么我们需要在防火墙规则里开启 22 端口： </p>
-<pre><code>firewall-cmd --add-port=22/tcp 
-</code></pre><p>&#160;如果需要永久开启 22 端口，后面加上 –permanent 即可:  </p>
-<pre><code>firewall-cmd --add-port=22/tcp --permanent
-</code></pre><ul>
-<li>确保你的网络宽带具有静态 IP 的特点，且路由器具备外网端口转发的功能。 </li>
-</ul>
-<h3 id="实现外网访问局域网中-Linux-服务器的步骤："><a href="#实现外网访问局域网中-Linux-服务器的步骤：" class="headerlink" title="实现外网访问局域网中 Linux 服务器的步骤："></a>实现外网访问局域网中 Linux 服务器的步骤：</h3><ul>
-<li>在局域网中的 Linux 服务器设置 SSH 服务器，并且开放 22 端口，在局域网中测试一遍此 Linux 服务器是否可以 SSH？一定要确保局域网中能够 SSH ，再设置外网 SSH；  </li>
-<li>在路由器的端口转发功能中：映射局域网内部 Linux 服务器的 IP 地址，以及 22 端口；  </li>
-<li>最后一点特别重要，需要在路由器的对外访问端口中也要填写 22 端口，应该能用其它端口实现的，目前还没有测试出来，测试 OK 之后再补进此篇文章中，目前路由器也设置为 22 端口是可以正常 SSH 到局域网中的 Linux 服务器。<br>&#160;综上，我就实现了在家中能够 SSH 到公司局域网中的 Linux 服务器，简单又方便。</li>
-</ul>
+        <p>待明天白天编辑</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://0upup.com/2019/04/27/如何从外网-ssh-局域网中的-Linux-服务器/" data-id="cjvl5fk6h00030z3r7a1kvqz4" class="article-share-link">Share</a>
+      <a data-url="http://0upup.com/2019/05/13/QT-编程中的-QChart/" data-id="cjvl5fk6900000z3rbtqqd9g5" class="article-share-link">Share</a>
       
     </footer>
 
@@ -84,19 +68,10 @@
     
   <nav class="article-nav">
     
+    
       <a href="/2019/04/30/Windows-操作系统环境中如何打包-QT-程序/" class="article-nav-link">
-        <strong class="article-nav-caption">Newer posts</strong>
-        <div class="article-nav-title">
-          
-            Windows 操作系统环境中如何打包 QT 程序
-          
-        </div>
-      </a>
-    
-    
-      <a href="/2019/04/26/语法如何进行段落的首行缩进/" class="article-nav-link">
         <strong class="article-nav-caption">Olde posts</strong>
-        <div class="article-nav-title">Markdown 语法如何实现段落的首行缩进以及换行功能</div>
+        <div class="article-nav-title">Windows 操作系统环境中如何打包 QT 程序</div>
       </a>
     
   </nav>

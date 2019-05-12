@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>
-    如何从外网 ssh 局域网中的 Linux 服务器 |
+    Windows 操作系统环境中如何打包 QT 程序 |
     
     Gavin‘s home</title>
   
@@ -23,7 +23,7 @@
 <body>
 <main class="content">
   <section class="outer">
-  <article id="post-如何从外网-ssh-局域网中的-Linux-服务器" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  <article id="post-Windows-操作系统环境中如何打包-QT-程序" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
     
@@ -31,7 +31,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      如何从外网 ssh 局域网中的 Linux 服务器
+      Windows 操作系统环境中如何打包 QT 程序
     </h1>
   
 
@@ -40,8 +40,8 @@
 
     
       <div class="article-meta">
-        <a href="/2019/04/27/如何从外网-ssh-局域网中的-Linux-服务器/" class="article-date">
-  <time datetime="2019-04-27T11:15:34.000Z" itemprop="datePublished">2019-04-27</time>
+        <a href="/2019/04/30/Windows-操作系统环境中如何打包-QT-程序/" class="article-date">
+  <time datetime="2019-04-30T15:14:21.000Z" itemprop="datePublished">2019-04-30</time>
 </a>
         
       </div>
@@ -53,28 +53,19 @@
       
 
       
-        <p>&#160; &#160; &#160; &#160;时间过的太快了，又来到周六，不过还有好多活儿没有干完，最近用 QT 画图画了快几个月了，画的我有点抓狂，要掌握的新东西太多，各种杂事又多，没办法，言归正传：今天周六为了能早点回家陪老婆孩子逛商场，我想把自己调试地图的程序放在家里 debug，怎奈何，目前服务器已经移植到公司本地服务器，所以，为了实现能在家里 ssh 公司本地的服务器，我做了一点点简单的处理，轻松实现了我的目的。  </p>
-<h3 id="环境要求："><a href="#环境要求：" class="headerlink" title="环境要求："></a>环境要求：</h3><ul>
-<li>确保局域网中的 Linux 服务器 22(Linux 系统默认的 SSH 端口) 端口已经开启，查看 Linux 防火墙是否开启某个端口的指令是：</li>
+        <p>记得上次打包 QT 程序还是在几个月前了，今天我把相应的机器人程序按照算法那边的同事要求初步设计完成，又遇到 QT 程序打包的问题。记性不好，特意在此记录下来，以便后续方便查阅之用，由于算法的同事使用的是操作系统环境为 Windows ，而我开发的环境是 Ubuntu ，所以，我需要在 Windows 环境中把 QT 程序打包成可执行的 exe 文件，具体的操作步骤如下：<br>QT 程序打包前的准备：  </p>
+<ul>
+<li>操作系统环境：Windows 7 专业版 64 位  </li>
+<li>QT IDE: QT Creator 4.8.0(Enterprise)  </li>
+<li>DLL 查询软件： ProcessExplorer  </li>
+<li>QT 程序打包软件: Enigma Virtual Box  </li>
 </ul>
-<pre><code>firewall-cmd --query-port=22/tcp
-</code></pre><p>&#160;如果结果返回为 “no”，那么我们需要在防火墙规则里开启 22 端口： </p>
-<pre><code>firewall-cmd --add-port=22/tcp 
-</code></pre><p>&#160;如果需要永久开启 22 端口，后面加上 –permanent 即可:  </p>
-<pre><code>firewall-cmd --add-port=22/tcp --permanent
-</code></pre><ul>
-<li>确保你的网络宽带具有静态 IP 的特点，且路由器具备外网端口转发的功能。 </li>
-</ul>
-<h3 id="实现外网访问局域网中-Linux-服务器的步骤："><a href="#实现外网访问局域网中-Linux-服务器的步骤：" class="headerlink" title="实现外网访问局域网中 Linux 服务器的步骤："></a>实现外网访问局域网中 Linux 服务器的步骤：</h3><ul>
-<li>在局域网中的 Linux 服务器设置 SSH 服务器，并且开放 22 端口，在局域网中测试一遍此 Linux 服务器是否可以 SSH？一定要确保局域网中能够 SSH ，再设置外网 SSH；  </li>
-<li>在路由器的端口转发功能中：映射局域网内部 Linux 服务器的 IP 地址，以及 22 端口；  </li>
-<li>最后一点特别重要，需要在路由器的对外访问端口中也要填写 22 端口，应该能用其它端口实现的，目前还没有测试出来，测试 OK 之后再补进此篇文章中，目前路由器也设置为 22 端口是可以正常 SSH 到局域网中的 Linux 服务器。<br>&#160;综上，我就实现了在家中能够 SSH 到公司局域网中的 Linux 服务器，简单又方便。</li>
-</ul>
-
+<h3 id="步骤一：设置-QT-程序的构建方式为-release"><a href="#步骤一：设置-QT-程序的构建方式为-release" class="headerlink" title="步骤一：设置 QT 程序的构建方式为 release"></a>步骤一：设置 QT 程序的构建方式为 release</h3><p>当 QT 程序编写完成之后，需要进行打包发布程序之前，启动 QT 程序都要使用 release 的构建方式，切记！  </p>
+<h3 id="步骤二：查找-QT-程序构建成功之后的-release-文件夹"><a href="#步骤二：查找-QT-程序构建成功之后的-release-文件夹" class="headerlink" title="步骤二：查找 QT 程序构建成功之后的 release 文件夹"></a>步骤二：查找 QT 程序构建成功之后的 release 文件夹</h3><h3 id="步骤三：使用-ProcessExplorer-查询软件查找运行-QT-执行程序时使用的外部库，并拷贝至步骤二中的-release-文件夹"><a href="#步骤三：使用-ProcessExplorer-查询软件查找运行-QT-执行程序时使用的外部库，并拷贝至步骤二中的-release-文件夹" class="headerlink" title="步骤三：使用 ProcessExplorer 查询软件查找运行 QT 执行程序时使用的外部库，并拷贝至步骤二中的 release 文件夹"></a>步骤三：使用 ProcessExplorer 查询软件查找运行 QT 执行程序时使用的外部库，并拷贝至步骤二中的 release 文件夹</h3><h3 id="步骤四：使用-Enigma-Virtual-Box-打包-QT-程序，并发布程序"><a href="#步骤四：使用-Enigma-Virtual-Box-打包-QT-程序，并发布程序" class="headerlink" title="步骤四：使用 Enigma Virtual Box 打包 QT 程序，并发布程序"></a>步骤四：使用 Enigma Virtual Box 打包 QT 程序，并发布程序</h3>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://0upup.com/2019/04/27/如何从外网-ssh-局域网中的-Linux-服务器/" data-id="cjvl591qu0002sr3rv9gc3rb1" class="article-share-link">Share</a>
+      <a data-url="http://0upup.com/2019/04/30/Windows-操作系统环境中如何打包-QT-程序/" data-id="cjvl591qm0000sr3rjmoqbhgv" class="article-share-link">Share</a>
       
     </footer>
 
@@ -84,19 +75,10 @@
     
   <nav class="article-nav">
     
-      <a href="/2019/04/30/Windows-操作系统环境中如何打包-QT-程序/" class="article-nav-link">
-        <strong class="article-nav-caption">Newer posts</strong>
-        <div class="article-nav-title">
-          
-            Windows 操作系统环境中如何打包 QT 程序
-          
-        </div>
-      </a>
     
-    
-      <a href="/2019/04/26/语法如何进行段落的首行缩进/" class="article-nav-link">
+      <a href="/2019/04/27/如何从外网-ssh-局域网中的-Linux-服务器/" class="article-nav-link">
         <strong class="article-nav-caption">Olde posts</strong>
-        <div class="article-nav-title">Markdown 语法如何实现段落的首行缩进以及换行功能</div>
+        <div class="article-nav-title">如何从外网 ssh 局域网中的 Linux 服务器</div>
       </a>
     
   </nav>
